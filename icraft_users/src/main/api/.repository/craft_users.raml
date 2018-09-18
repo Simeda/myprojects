@@ -1,0 +1,67 @@
+#%RAML 1.0
+baseUri: https://mocksvc.mulesoft.com/mocks/8fb13aa4-0a91-4703-b536-c8ddded6ec6b # 
+title: craft_users
+version: 1.0
+
+types:
+  CraftUsers: !include Example/craftUsersDataType.raml
+
+/users:
+  get:
+    queryParameters: 
+      id:
+        required: false
+    responses: 
+      200:
+        body: 
+          application/json:
+            type: CraftUsers[]
+            example: !include Example/craftUsersExample.raml
+  
+  post:
+    body: 
+      application/json:
+        type: CraftUsers
+        example: !include Example/NewCraftuserNoIDSample.raml
+    responses: 
+      200:
+        body: 
+          application/json:
+            example:
+              message: New Craft user created
+
+  /{id}:
+    get:
+      queryParameters: 
+        id:
+          required: false
+      responses: 
+        200:
+          body: 
+            application/json:
+              type: CraftUsers
+              example: !include Example/CraftUserWithIDSample.raml
+
+    delete:
+      body: 
+        application/json:
+          type: CraftUsers
+          example: !include Example/CraftUserWithIDSample.raml
+      responses: 
+        200:
+          body: 
+            application/json:
+              example:
+                message: User deleted
+
+    put:
+      body: 
+        application/json:
+          type: CraftUsers
+          example: !include Example/NewCraftuserNoIDSample.raml
+      responses: 
+        200:
+          body: 
+            application/json:
+              example:
+                message: Craft User Updated
