@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+    <flow name="getConversionRateFlow">
+        <choice doc:name="Choice">
+            <when expression="payload.equals('europe')">
+                <set-payload value="#[0.85]" doc:name="EURO"/>
+            </when>
+            <when expression="payload.equals('uk')">
+                <set-payload value="#[0.75]" doc:name="POUND"/>
+            </when>
+            <when expression="payload.equals('eritrea')">
+                <set-payload value="#[15]" doc:name="NAKFA"/>
+            </when>
+            <otherwise>
+                <set-payload value="#[1]" doc:name="USD"/>
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="complect-transformerFlow">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/transform1" doc:name="HTTP"/>
+        <dw:transform-message doc:name="Transform Message" metadata:id="640fe1f1-b069-4a30-ab29-f58b426df4fc">
+            <dw:input-payload doc:sample="products.json" mimeType="application/json"/>
+            <dw:input-inbound-property  propertyName="http.query.params"/>
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/xml
+%var conversionRate= lookup("getConversionRateFlow", inboundProperties.'http.query.params'.country)
+%function getconvertedRate(price) price*conversionRate
+%var getConversionRate = (price) -> price*conversionRate
+%function getImages(images) {
+								(
+									images map {
+									image: $
+								}
+							)
+						}
+---
+products: {
+			(
+					(
+				payload map {
+					product: {
+						pname: $.name,
+						pid: $.productId,
+						offerPrice: getConversionRate($.offer.offerPrice),
+						brandName: $.brandName,
+						images: getImages($.images)
+						
+				
+						}
+				
+					}
+					
+					) orderBy $.product.offerPrice
+			
+
+	)
+}]]></dw:set-payload>
+        </dw:transform-message>
+        <logger message="#[payload]" level="INFO" doc:name="Logger"/>
+    </flow>
+</mule>
