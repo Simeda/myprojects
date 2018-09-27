@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "first": "Adam",
+        "last": "Bob",
+        "department": "IIB"
+    },
+    {
+        "id": 2,
+        "first": "Ted",
+        "last": "Bear",
+        "department": "Mule"
+    }
+]

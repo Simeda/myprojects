@@ -1,0 +1,17 @@
+<candidates>
+	<candidate>
+		<first>first11</first>
+		<last>last11</last>
+		<department>mule</department>
+	</candidate>
+	<candidate>
+		<first>first12</first>
+		<last>last12</last>
+		<department>iib</department>
+	</candidate>
+	<candidate>
+		<first>first13</first>
+		<last>last13</last>
+		<department>dp</department>
+	</candidate>
+</candidates>
