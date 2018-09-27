@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<products>
+    <product>
+        <pname>Hp Pavilion laptop</pname>
+        <pid>1</pid>
+        <offerPrice>1000</offerPrice>
+        <brandName>HP</brandName>
+        <offerValidDate>2016-05-29</offerValidDate>
+        <description>Hp Laptop </description>
+        <images>
+            <image>image0.jpeg</image>
+            <image>image1.jpeg</image>
+            <image>image2.jpeg</image>
+        </images>
+    </product>
+    <product>
+        <pname>Mac Pro Laptop</pname>
+        <pid>2</pid>
+        <offerPrice>1500</offerPrice>
+        <brandName>Apple</brandName>
+        <offerValidDate>2016-05-29</offerValidDate>
+        <description>Apple Laptop</description>
+        <images>
+            <image>image3.jpeg</image>
+            <image>image4.jpeg</image>
+            <image>image5.jpeg</image>
+        </images>
+    </product>
+    <product>
+        <pname>Mac Book laptop</pname>
+        <pid>3</pid>
+        <offerPrice>1200</offerPrice>
+        <brandName>HP</brandName>
+        <offerValidDate>2016-05-29</offerValidDate>
+        <description>Apple Laptop</description>
+        <images>
+            <image>image1.jpeg</image>
+            <image>image2.jpeg</image>
+            <image>image3.jpeg</image>
+        </images>
+    </product>
+    <product>
+        <pname>VAIO laptop</pname>
+        <pid>4</pid>
+        <offerPrice>900</offerPrice>
+        <brandName>VAIO</brandName>
+        <offerValidDate>2016-05-29</offerValidDate>
+        <description>Sony Laptop </description>
+        <images>
+            <image>image9.jpeg</image>
+            <image>image10.jpeg</image>
+            <image>image11.jpeg</image>
+        </images>
+    </product>
+    <product>
+        <pname>MotoX Mobile</pname>
+        <pid>5</pid>
+        <offerPrice>100</offerPrice>
+        <brandName>Motorola</brandName>
+        <offerValidDate>2016-05-29</offerValidDate>
+        <description>Motorola Mobile</description>
+        <images>
+            <image>image12.jpeg</image>
+            <image>image13.jpeg</image>
+            <image>image14.jpeg</image>
+        </images>
+    </product>
+    <product>
+        <pname>Samsung Note 5</pname>
+        <pid>6</pid>
+        <offerPrice>500</offerPrice>
+        <brandName>Samsung</brandName>
+        <offerValidDate>2016-05-29</offerValidDate>
+        <description>Samsung Mobile</description>
+        <images>
+            <image>image15.jpeg</image>
+            <image>image16.jpeg</image>
+            <image>image17.jpeg</image>
+        </images>
+    </product>
+</products>

@@ -29,40 +29,9 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
         <dw:transform-message doc:name="Transform Message" metadata:id="640fe1f1-b069-4a30-ab29-f58b426df4fc">
             <dw:input-payload doc:sample="products.json" mimeType="application/json"/>
             <dw:input-inbound-property  propertyName="http.query.params"/>
-            <dw:set-payload><![CDATA[%dw 1.0
-%output application/xml
-%var conversionRate= lookup("getConversionRateFlow", inboundProperties.'http.query.params'.country)
-%function getconvertedRate(price) price*conversionRate
-%var getConversionRate = (price) -> price*conversionRate
-%function getImages(images) {
-								(
-									images map {
-									image: $
-								}
-							)
-						}
----
-products: {
-			(
-					(
-				payload map {
-					product: {
-						pname: $.name,
-						pid: $.productId,
-						offerPrice: getConversionRate($.offer.offerPrice),
-						brandName: $.brandName,
-						images: getImages($.images)
-						
-				
-						}
-				
-					}
-					
-					) orderBy $.product.offerPrice
-			
+            <dw:set-payload resource="classpath:product_dwTransform.dwl"/>
+            <dw:set-property resource="classpath:prodOutProperty.dwl" propertyName="pname"/>
 
-	)
-}]]></dw:set-payload>
         </dw:transform-message>
         <logger message="#[payload]" level="INFO" doc:name="Logger"/>
     </flow>
